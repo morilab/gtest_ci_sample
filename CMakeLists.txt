@@ -5,9 +5,10 @@ project(GTestCISample)
 set(GTEST_DIR ${CMAKE_SOURCE_DIR}/external/googletest)
 add_subdirectory(${GTEST_DIR} googletest_build)
 
-# テスト対象のファイル
-add_executable(test_example test_example.cpp)
+# ソースコード
+add_library(mylib src/mylib.cpp)
+target_include_directories(mylib PUBLIC src)
 
-# Google Test をリンク
-target_link_libraries(test_example gtest gtest_main pthread)
+# テストの追加
+add_subdirectory(test)
 
