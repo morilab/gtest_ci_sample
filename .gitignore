@@ -1,0 +1,29 @@
+# CMake のビルドファイル
+/build/
+/CMakeCache.txt
+/CMakeFiles/
+/cmake_install.cmake
+Makefile
+
+# コンパイル済みバイナリ
+*.o
+*.a
+*.so
+*.exe
+*.dll
+*.dylib
+*.out
+
+# Google Test
+external/googletest/build/
+external/googletest/CMakeCache.txt
+external/googletest/CMakeFiles/
+external/googletest/Makefile
+
+# エディタ・IDE の設定ファイル
+.vscode/
+.idea/
+*.swp
+*.swo
+*.s
+
