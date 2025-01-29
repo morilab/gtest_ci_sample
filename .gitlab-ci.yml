@@ -7,6 +7,9 @@ variables:
 
 build:
   stage: build
+  tags:
+    - docker
+    - ci
   image: docker:latest  # Docker コンテナで GCC を使用
   services:
     - docker:dind  # Docker in Docker を有効化
@@ -22,6 +25,10 @@ build:
       - build/
 test:
   stage: test
+  tags:
+    - docker
+    - ci
+    - gtest
   image: docker:latest
   services:
     - docker:dind
