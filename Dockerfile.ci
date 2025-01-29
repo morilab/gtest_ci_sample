@@ -1,0 +1,26 @@
+# ベースイメージとして軽量なUbuntu 20.04を使用
+FROM ubuntu:20.04
+
+# 環境変数の設定（非対話モードを指定）
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 必要なパッケージのインストール
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    git \
+    wget \
+    curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# CMakeバージョン確認用のコマンドを追加（デバッグ用）
+RUN cmake --version
+
+# 作業ディレクトリの設定
+WORKDIR /workspace
+
+# 初期状態でコンテナを軽量化
+CMD ["/bin/bash"]
+

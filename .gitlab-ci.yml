@@ -2,19 +2,30 @@ stages:
   - build
   - test
 
+variables:
+  DOCKER_DRIVER: overlay2
+
 build:
   stage: build
-  image: ubuntu:latest
+  image: docker:latest  # Docker コンテナで GCC を使用
+  services:
+    - docker:dind  # Docker in Docker を有効化
   before_script:
-    - apt update && apt install -y cmake g++ libgtest-dev
+    - docker build -t gtest-ci-image -f Dockerfile.ci .
   script:
-    - mkdir build && cd build
-    - cmake ..
-    - make
-
+    - docker run --rm -v $(pwd):/workspace gtest-ci-image /bin/sh -c "
+        mkdir -p build && cd build &&
+        cmake .. &&
+        make"
+  artifacts:
+    paths:
+      - build/
 test:
   stage: test
+  image: docker:latest
+  services:
+    - docker:dind
   script:
-    - cd build
-    - ./test/test_mylib
-
+    - docker run --rm -v $(pwd):/workspace gtest-ci-image /bin/sh -c "
+        cd build &&
+        ./test/test_mylib"
