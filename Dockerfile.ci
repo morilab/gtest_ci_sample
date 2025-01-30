@@ -1,5 +1,5 @@
-# ベースイメージとして軽量なUbuntu 20.04を使用
-FROM ubuntu:20.04
+#gitlab-runnerのベースはubuntu:20.04
+FROM gitlab/gitlab-runner:latest 
 
 # 環境変数の設定（非対話モードを指定）
 ENV DEBIAN_FRONTEND=noninteractive
