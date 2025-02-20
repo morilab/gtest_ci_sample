@@ -1,5 +1,6 @@
 # CMake のビルドファイル
 /build/
+/Testing/
 /CMakeCache.txt
 /CMakeFiles/
 /cmake_install.cmake
